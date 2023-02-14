@@ -1,0 +1,58 @@
+<!-- - Including header file from components folder which contain (head tag and body opening tag) -->
+<%- include('./components/header') -%>
+
+<!-- - Including navbar file from components folder -->
+<%- include('./components/navbar') -%>
+<!-- - Back to all users -->
+<div class="container mt-1">
+  <a href="/" class="btn btn-secondary fw-bold mt-2">&larr; Back</a>
+</div>
+<!-- - All customers -->
+<div class="container my-3">
+  <h2 class="text-center fw-bold text-decoration-underline">
+    All Customers List
+  </h2>
+
+  <!-- - Customers table -->
+  <div class="container my-5 cus_all_user_tbl">
+    <table class="table">
+      <thead class="text-light bg-dark text-center">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Action</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% if(records.length> 0) {%> <% records.forEach((row)=> {%>
+        <tr>
+          <td><%= row.name%></td>
+          <td><%= row.email%></td>
+
+          <td><%= row.amount%></td>
+          <td>
+            <a href="/view/<%= row._id %>" class="btn btn-dark"
+              >View & Transfer</a
+            >
+          </td>
+          <td>
+            <a href="/delete/<%= row._id %>" class="btn btn-danger">
+              <i class="fa fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+
+        <%}) %> <%} else{%>
+        <tr class="bg-warning">
+          <td>No records found</td>
+        </tr>
+        <%}%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- - Including footer file from component folder which contain (body closing tag) -->
+<%- include('./components/footer') -%>

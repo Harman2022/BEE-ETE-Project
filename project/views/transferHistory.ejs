@@ -1,0 +1,80 @@
+<!-- - Including header file from components folder which contain (head tag and body opening tag) -->
+<%- include('./components/header') -%>
+
+<!-- - Including navbar file from components folder -->
+<%- include('./components/navbar') -%>
+<!-- - Back to all users -->
+<div class="container mt-1">
+  <a href="/" class="btn btn-secondary fw-bold mt-2">&larr; Back</a>
+</div>
+<!-- ? Search bar -->
+<div class="container d-flex justify-content-center my-3">
+  <form action="/search" method="POST" class="d-flex">
+    <select name="option" class="form-select w-25">
+      <option>All</option>
+      <option>Sender</option>
+      <option>Receiver</option>
+    </select>
+
+    <input
+      type="text"
+      class="form-control fw-bold text-dark mx-1 w-50"
+      name="searchEmail"
+      placeholder="Enter Email"
+    />
+    <input type="submit" class="btn btn-dark" value="Search" />
+    <!-- <button type="submit" class="btn btn-dark">Search</button> -->
+  </form>
+</div>
+
+<!-- - All customers -->
+<div class="container my-3">
+  <h2 class="text-center fw-bold text-decoration-underline">
+    Transaction History
+  </h2>
+
+  <!-- - Customers table -->
+  <div class="container my-5 cus_all_user_tbl">
+    <table class="table">
+      <thead class="text-light bg-dark text-center">
+        <tr>
+          <th scope="col">Sender</th>
+          <th scope="col">Receiver</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Date</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% if(records.length> 0) {%> <% records.forEach((row)=> {%>
+
+        <tr>
+          <td><%= row.semail %></td>
+
+          <td><%= row.remail %></td>
+
+          <td><%= row.amount %></td>
+
+          <td><%= row.date %></td>
+          <td>
+            <a href="/historydelete/<%= row._id %>">
+              <i
+                class="fas fa-minus-circle text-danger"
+                style="font-size: 15px"
+              ></i>
+            </a>
+          </td>
+        </tr>
+
+        <%}) %> <%} else{%>
+        <tr class="bg-warning">
+          <td>No records found</td>
+        </tr>
+        <%}%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- - Including footer file from component folder which contain (body closing tag) -->
+<%- include('./components/footer') -%>
